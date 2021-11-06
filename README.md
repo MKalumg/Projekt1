@@ -8,6 +8,6 @@ Stacja pogodowa wyswietlająca temeraturę i wilgotność w języku Polskim oraz
  - Wyświetlacz LED
  - Przycisk
  - Rezystory
- - Kable męsko-męskie oraz męsko -żeńskie 
+ - Kable męsko-męskie oraz męsko-żeńskie 
  - Zworki 
  - Dioda LED
