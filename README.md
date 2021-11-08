@@ -11,3 +11,4 @@ Stacja pogodowa wyswietlająca temeraturę i wilgotność w języku Polskim oraz
  - Kable męsko-męskie oraz męsko-żeńskie 
  - Zworki 
  - Dioda LED
+janeczek
