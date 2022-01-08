@@ -26,7 +26,7 @@ Na początek należało dodać biblioteki.
 
 Następnie zdeklarowane zostały Piny dla poszczególnych elementów wkorzystanych w ćwiczeniu.
 ``` cpp
-#define DHT_PIN 6                            // PIN cyfrowy podlaczony do DHT11
+#define DHT_PIN 6                                 // PIN cyfrowy podlaczony do DHT11
 #define DHTTYPE DHT22                             // Zdefiniowany typ DHT w tym przypadku DHT11
 const int buttonPin = 9;                          // PIN podlaczony do guzika
 const int rledPin =  8;                           // PIN podlaczony do czerwonego LEDA
@@ -58,13 +58,13 @@ Przypisano zmienne wartość temperatury w Celsjuszach, Farenheitach oraz wilgot
 ``` cpp
  void loop()
 {
-  float tempC = dht.readTemperature();                                    // Temperatura w C
-  float tempF;                                    // Temperature w F
+  float tempC = dht.readTemperature();     // Temperatura w C
+  float tempF;                             // Temperature w F
   float humidity = dht.readHumidity();     // Wilgotnosc
 ```
 Sprawdzenie poprawności działania czujnika DHT22.
 ``` cpp
-if (isnan(humidity) || isnan(tempC))                          // Sprawdza blad odczytu z czujnika DHT11
+if (isnan(humidity) || isnan(tempC))              // Sprawdza blad odczytu z czujnika DHT11
     {
       Serial.println(F("Brak odczytu z DHT!"));   // Zwraca blad w Serial Monitorze
       return;                                     // Zapetla az blad ustanie
@@ -92,8 +92,6 @@ button = buttonState;                           // Stan guzika w zmiennej
 
       digitalWrite(gledPin, HIGH);               // Zapala zielonego LEDA
       digitalWrite(rledPin, LOW);                // Gasi czerwonego LEDA
-      
-      //sensors.requestTemperatures();             // Wysyła komende aby odczytac wartosc temperatury
       tempC;        // Czyta wartosc temperatury w C
 
       Serial.print("Temperatura: ");             // Wyswietla napis
@@ -106,7 +104,7 @@ button = buttonState;                           // Stan guzika w zmiennej
 
 
       lcd.setCursor(0, 0);
-      lcd.print(" TEMP      WILG");                    // Wyswietla napis
+      lcd.print(" TEMP      WILG");              // Wyswietla napis
       lcd.setCursor(1,3);                        
       lcd.print(round(tempC));                   // Wypisuje temperature w C
       lcd.print("C       ");                     // Wyswietla napis
@@ -125,8 +123,6 @@ else
     {   
       digitalWrite(gledPin, LOW);                // Gasi zielonego LEDA
       digitalWrite(rledPin, HIGH);               // Zapala czerwonego LEDA
-      
-      //sensors.requestTemperatures();             // Wysyła komende aby odczytac wartosc temperatury
       tempC;        // Czyta wartosc temperatury w C
       tempF = tempC * 9 / 5 + 32;                // Konwertuje wartosc temperatury z C na F
 
@@ -134,13 +130,13 @@ else
       Serial.print(tempF);                       // Wypisuje temperature w F
       Serial.println("°F");                      // Wyswietla napis
       Serial.print("  -  ");                     // Separator
-      Serial.print("Humidity: ");              // Wyswietla napis
+      Serial.print("Humidity: ");               // Wyswietla napis
       Serial.print(humidity);                    // Wypisuje wilgotnosc w %
       Serial.print("%");                         // Wyswietla napis
 
 
       lcd.setCursor(0, 0);
-      lcd.print(" TEMP      HUMI");                   // Wyswietla napis
+      lcd.print(" TEMP      HUMI");              // Wyswietla napis
       lcd.setCursor(1,3);                        
       lcd.print(round(tempF));                   // Wypisuje temperature w F
       lcd.print("F       ");                     // Wyswietla napis
