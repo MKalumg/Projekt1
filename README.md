@@ -19,18 +19,18 @@ Stworzony układ wyświetla na wyświetlaczu LED wilgotność powietrza oraz tem
 
 Na początek należało dodać biblioteki.
 ``` cpp
-#include <LiquidCrystal.h>                       // Biblioteka wykorzystana do ekranu LCD
-#include <Adafruit_Sensor.h>                     // Wymagana bilbioteka do poprawnego działania sensora DHT11
-#include <DHT.h>                                 // Biblioteka wykorzystana dla czujnika DHT11
+#include <LiquidCrystal.h>                       // Biblioteka do ekranu LCD
+#include <Adafruit_Sensor.h>                     // Bilbioteka do   sensora DHT22
+#include <DHT.h>                                 // Biblioteka do czujnika DHT22
 ```
 
 Następnie zdeklarowane zostały Piny dla poszczególnych elementów wkorzystanych w ćwiczeniu.
 ``` cpp
-#define DHT_PIN 6                                 // PIN cyfrowy podlaczony do DHT11
-#define DHTTYPE DHT22                             // Zdefiniowany typ DHT w tym przypadku DHT11
-const int buttonPin = 9;                          // PIN podlaczony do guzika
-const int rledPin =  8;                           // PIN podlaczony do czerwonego LEDA
-const int gledPin =  7;                           // PIN podlaczony do zielonego LEDA
+#define DHT_PIN 6                                 // PIN cyfrowy podlaczony do DHT22
+#define DHTTYPE DHT22                             // Zdefiniowany typ DHT w tym przypadku DHT22
+const int buttonPin = 9;                          // PIN do guzika
+const int rledPin =  8;                           // PIN do czerwonego LEDA
+const int gledPin =  7;                           // PIN do zielonego LEDA
 int buttonState = 0;
 int klik = 0;
 int button = 0;
@@ -44,13 +44,13 @@ Ustawiono wyświetlanie tekstu na wyświetlaczu, uruchomiono sensor oraz zdefini
 ``` cpp
 void setup()
 {
-  pinMode(rledPin, OUTPUT);                       // Ustawienie czerwonego LEDA jako wyjście
-  pinMode(gledPin, OUTPUT);                       // Ustawienie zielonego LEDA jako wyjście
+  pinMode(rledPin, OUTPUT);                       // Ustawienie czerwonego LEDA jako wyj
+  pinMode(gledPin, OUTPUT);                       // Ustawienie zielonego LEDA jako wyj
   pinMode(buttonPin, INPUT_PULLUP);
   lcd.begin(16, 2);
-  lcd.print(" TEMP      WILG");                   // Wyswietla napis
+  lcd.print(" TEMP      WILG");                   // Wyswietlenie napisu
   Serial.begin(9600);
-  dht.begin();                                    // Uruchamia sensor DHT11
+  dht.begin();                                    // Uruchamia sensor DHT22
 }
 ```
 Przypisano zmienne wartość temperatury w Celsjuszach, Farenheitach oraz wilgotność powietrza.
@@ -58,21 +58,21 @@ Przypisano zmienne wartość temperatury w Celsjuszach, Farenheitach oraz wilgot
 ``` cpp
  void loop()
 {
-  float tempC = dht.readTemperature();     // Temperatura w C
-  float tempF;                             // Temperature w F
+  float tempC = dht.readTemperature();     // Temperatura C
+  float tempF;                             // Temperatura F
   float humidity = dht.readHumidity();     // Wilgotnosc
 ```
 Sprawdzenie poprawności działania czujnika DHT22.
 ``` cpp
-if (isnan(humidity) || isnan(tempC))              // Sprawdza blad odczytu z czujnika DHT11
+if (isnan(humidity) || isnan(tempC))              // Sprawdza blad z czujnika DHT22
     {
       Serial.println(F("Brak odczytu z DHT!"));   // Zwraca blad w Serial Monitorze
-      return;                                     // Zapetla az blad ustanie
+      return;                                     // Powtarza jak jest blad
     }
 ```
 Sprawdzenie stanu guzika.
 ``` cpp
-buttonState = digitalRead(buttonPin);           // Odczytanie stanu przycisku (HIGH lub LOW)
+buttonState = digitalRead(buttonPin);           // Odczytanie stanu przycisku
   
   Serial.print("  -  ");                          // Separator
   Serial.print("Stan przycisku:  ");              // Wyswietla napis
