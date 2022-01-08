@@ -2,12 +2,15 @@
 Stacja pogodowa wyswietlająca temeraturę i wilgotność w języku Polskim oraz Angielskim.
 # Opis projektu
  Elementy do wykonania projektu:
- - Płyta Arduino
+ - Płyta Arduino Uno
  - Płyta stykowa
- - Czujnik temperatury oraz wilgoci
  - Wyświetlacz LED
  - Przycisk
- - Rezystory
- - Kable męsko-męskie oraz męsko-żeńskie 
+ - Rezystory (10kΩ, 4.7kΩ, 220Ω)
+ - Kable męsko-męskie
  - Zworki 
- - Dioda LED
+ - Diody LED
+ - Moduł DHT22
+ - Potencjometr 10kΩ
+ 
+Stworzony układ wyświetla na wyświetlaczu LED wilgotność powietrza oraz temperaturę w Celsjuszach i Farenheitach pobieraną z czujnika DHT22. Dzięki przyciskowi możemy wybrać czy chcemy wyświetlić temperaturę  w Celsjuszach czy Fahrenheitach oraz ustawić w języku angielskim lub polskim co sygnalizuje diod LED (Zielona dla F, czerwona dla C).
