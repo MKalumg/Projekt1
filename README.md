@@ -17,31 +17,142 @@ Stworzony układ wyświetla na wyświetlaczu LED wilgotność powietrza oraz tem
 
 
 
-
+Na początek należało dodać biblioteki.
 ``` cpp
-
-
-
+#include <LiquidCrystal.h>                       // Biblioteka wykorzystana do ekranu LCD
+#include <Adafruit_Sensor.h>                     // Wymagana bilbioteka do poprawnego działania sensora DHT11
+#include <DHT.h>                                 // Biblioteka wykorzystana dla czujnika DHT11
 ```
 
+Następnie zdeklarowane zostały Piny dla poszczególnych elementów wkorzystanych w ćwiczeniu.
+``` cpp
+#define DHT_PIN 6                            // PIN cyfrowy podlaczony do DHT11
+#define DHTTYPE DHT22                             // Zdefiniowany typ DHT w tym przypadku DHT11
+const int buttonPin = 9;                          // PIN podlaczony do guzika
+const int rledPin =  8;                           // PIN podlaczony do czerwonego LEDA
+const int gledPin =  7;                           // PIN podlaczony do zielonego LEDA
+int buttonState = 0;
+int klik = 0;
+int button = 0;
+bool CF = true;
+DHT dht = DHT(DHT_PIN ,DHTTYPE);
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2);            // Podlaczone PINY wyswietlacza LCD
+```
+
+Ustawiono wyświetlanie tekstu na wyświetlaczu, uruchomiono sensor oraz zdefiniowano diody LED jako wyjście.
+
+``` cpp
+void setup()
+{
+  pinMode(rledPin, OUTPUT);                       // Ustawienie czerwonego LEDA jako wyjście
+  pinMode(gledPin, OUTPUT);                       // Ustawienie zielonego LEDA jako wyjście
+  pinMode(buttonPin, INPUT_PULLUP);
+  lcd.begin(16, 2);
+  lcd.print(" TEMP      WILG");                   // Wyswietla napis
+  Serial.begin(9600);
+  //sensors.begin();                                // Uruchamia sensor DS18B20
+  dht.begin();                                    // Uruchamia sensor DHT11
+}
+```
+Przypisano zmienne wartość temperatury w Celsjuszach, Farenheitach oraz wilgotność powietrza.
+
+``` cpp
+ void loop()
+{
+  float tempC = dht.readTemperature();                                    // Temperatura w C
+  float tempF;                                    // Temperature w F
+  float humidity = dht.readHumidity();     // Wilgotnosc
+```
+Sprawdzenie poprawności działania czujnika DHT22.
+``` cpp
+if (isnan(humidity) || isnan(tempC))                          // Sprawdza blad odczytu z czujnika DHT11
+    {
+      Serial.println(F("Brak odczytu z DHT!"));   // Zwraca blad w Serial Monitorze
+      return;                                     // Zapetla az blad ustanie
+    }
+```
+Sprawdzenie stanu guzika.
+``` cpp
+buttonState = digitalRead(buttonPin);           // Odczytanie stanu przycisku (HIGH lub LOW)
+  
+  Serial.print("  -  ");                          // Separator
+  Serial.print("Stan przycisku:  ");              // Wyswietla napis
+  Serial.println(buttonState);                    // Wypisuje stan przycisku w Serial Monitor
+```
+Wyświetlenie temeratury w Celsjuszach, nazw w języku Polskim, oraz zapalenie się czerwonej diody.
+``` cpp
+button = buttonState;                           // Stan guzika w zmiennej
+  if(klik==0 && button==1)
+  {
+  CF = !CF;
+  }
+  klik = button;
+  
+  if (CF)                                        // Wybór pomiędzy C lub F
+    {
+
+      digitalWrite(gledPin, HIGH);               // Zapala zielonego LEDA
+      digitalWrite(rledPin, LOW);                // Gasi czerwonego LEDA
+      
+      //sensors.requestTemperatures();             // Wysyła komende aby odczytac wartosc temperatury
+      tempC;        // Czyta wartosc temperatury w C
+
+      Serial.print("Temperatura: ");             // Wyswietla napis
+      Serial.print(tempC);                       // Wypisuje temperature w C
+      Serial.print("°C");                        // Wyswietla napis
+      Serial.print("  -  ");                     // Separator
+      Serial.print("Wilgotnosc: ");              // Wyswietla napis
+      Serial.print(humidity);                    // Wypisuje wilgotnosc w %
+      Serial.print("%");                         // Wyswietla napis
 
 
+      lcd.setCursor(0, 0);
+      lcd.print(" TEMP      WILG");                    // Wyswietla napis
+      lcd.setCursor(1,3);                        
+      lcd.print(round(tempC));                   // Wypisuje temperature w C
+      lcd.print("C       ");                     // Wyswietla napis
+      lcd.print(round(humidity));                // Wypisuje wilgotnosc w %
+      lcd.print("%   ");                         // Wyswietla napis
+    }
+
+```
+![img](./zdj1.jpg)
 
 
+Wyświetlenie temeratury w Fahrenheitach, nazw w języku Angielskim, oraz zapalenie się zielonej diody.
+
+``` cpp
+else
+    {   
+      digitalWrite(gledPin, LOW);                // Gasi zielonego LEDA
+      digitalWrite(rledPin, HIGH);               // Zapala czerwonego LEDA
+      
+      //sensors.requestTemperatures();             // Wysyła komende aby odczytac wartosc temperatury
+      tempC;        // Czyta wartosc temperatury w C
+      tempF = tempC * 9 / 5 + 32;                // Konwertuje wartosc temperatury z C na F
+
+      Serial.print("Temperature: ");             // Wyswietla napis
+      Serial.print(tempF);                       // Wypisuje temperature w F
+      Serial.println("°F");                      // Wyswietla napis
+      Serial.print("  -  ");                     // Separator
+      Serial.print("Humidity: ");              // Wyswietla napis
+      Serial.print(humidity);                    // Wypisuje wilgotnosc w %
+      Serial.print("%");                         // Wyswietla napis
 
 
-
-
-
-
-
-
-
-
-
+      lcd.setCursor(0, 0);
+      lcd.print(" TEMP      HUMI");                   // Wyswietla napis
+      lcd.setCursor(1,3);                        
+      lcd.print(round(tempF));                   // Wypisuje temperature w F
+      lcd.print("F       ");                     // Wyswietla napis
+      lcd.print(round(humidity));                // Wypisuje wilgotnosc w %
+      lcd.print("%   ");                         // Wyswietla napis
+   }
+ 
+```
 
 ![img](./zdj2.jpg)
 
 
 
-![img](./zdj1.jpg)
+
