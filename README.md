@@ -40,8 +40,8 @@ Stworzony układ wyświetla na wyświetlaczu LED wilgotność powietrza oraz tem
 
 
 
-![jpg](./hardware/zdj2.jpg)
+![img](./zdj2.jpg)
 
 
 
-![jpg](./hardware/zdj1.jpg)
+![img](./zdj1.jpg)
