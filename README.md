@@ -14,3 +14,15 @@ Stacja pogodowa wyswietlająca temeraturę i wilgotność w języku Polskim oraz
  - Potencjometr 10kΩ
  
 Stworzony układ wyświetla na wyświetlaczu LED wilgotność powietrza oraz temperaturę w Celsjuszach i Farenheitach pobieraną z czujnika DHT22. Dzięki przyciskowi możemy wybrać czy chcemy wyświetlić temperaturę  w Celsjuszach czy Fahrenheitach oraz ustawić w języku angielskim lub polskim co sygnalizuje diod LED (Zielona dla F, czerwona dla C).
+
+
+![img](./zdj/IMG_7370.jpg)
+
+
+
+![img](./zdj/IMG_7371.jpg)
+
+
+
+
+
