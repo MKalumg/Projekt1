@@ -50,7 +50,6 @@ void setup()
   lcd.begin(16, 2);
   lcd.print(" TEMP      WILG");                   // Wyswietla napis
   Serial.begin(9600);
-  //sensors.begin();                                // Uruchamia sensor DS18B20
   dht.begin();                                    // Uruchamia sensor DHT11
 }
 ```
