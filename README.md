@@ -72,7 +72,7 @@ if (isnan(humidity) || isnan(tempC))              // Sprawdza blad z czujnika DH
 ```
 Sprawdzenie stanu guzika.
 ``` cpp
-buttonState = digitalRead(buttonPin);           // Odczytanie stanu przycisku
+buttonState = digitalRead(buttonPin);            // Odczytanie stanu przycisku
   
   Serial.print("  -  ");                          // Separator
   Serial.print("Stan przycisku:  ");              // Wyswietla napis
@@ -92,7 +92,7 @@ button = buttonState;                           // Stan guzika w zmiennej
 
       digitalWrite(gledPin, HIGH);               // Zapala zielonego LEDA
       digitalWrite(rledPin, LOW);                // Gasi czerwonego LEDA
-      tempC;        // Czyta wartosc temperatury w C
+      tempC;                                     // Czyta wartosc temperatury w C
 
       Serial.print("Temperatura: ");             // Wyswietla napis
       Serial.print(tempC);                       // Wypisuje temperature w C
@@ -123,14 +123,14 @@ else
     {   
       digitalWrite(gledPin, LOW);                // Gasi zielonego LEDA
       digitalWrite(rledPin, HIGH);               // Zapala czerwonego LEDA
-      tempC;        // Czyta wartosc temperatury w C
+      tempC;                                     // Czyta wartosc temperatury w C
       tempF = tempC * 9 / 5 + 32;                // Konwertuje wartosc temperatury z C na F
 
       Serial.print("Temperature: ");             // Wyswietla napis
       Serial.print(tempF);                       // Wypisuje temperature w F
       Serial.println("°F");                      // Wyswietla napis
       Serial.print("  -  ");                     // Separator
-      Serial.print("Humidity: ");               // Wyswietla napis
+      Serial.print("Humidity: ");                // Wyswietla napis
       Serial.print(humidity);                    // Wypisuje wilgotnosc w %
       Serial.print("%");                         // Wyswietla napis
 
