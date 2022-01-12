@@ -150,7 +150,6 @@ else
 
 Film przedstawiający działanie projektu:
 
-
 https://www.youtube.com/watch?v=rMlQoOf7bxg
 
 
